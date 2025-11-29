@@ -13,7 +13,7 @@ const authHeaders = () => ({
 
 // Auth APIs
 export async function register(username, email, password) {
-  const res = await fetch(`${API_URL}/register`, {
+  const res = await fetch(`${API_URL}/api/register`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({username, email, password})
@@ -29,8 +29,8 @@ export async function login(username, password) {
   const formData = new URLSearchParams();
   formData.append("username", username);
   formData.append("password", password);
-  
-  const res = await fetch(`${API_URL}/token`, {
+
+  const res = await fetch(`${API_URL}/api/token`, {
     method: "POST",
     headers: {"Content-Type": "application/x-www-form-urlencoded"},
     body: formData
@@ -45,7 +45,7 @@ export async function login(username, password) {
 }
 
 export async function getCurrentUser() {
-  const res = await fetch(`${API_URL}/users/me`, {
+  const res = await fetch(`${API_URL}/api/users/me`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Unauthorized");
@@ -54,7 +54,7 @@ export async function getCurrentUser() {
 
 // Expense APIs
 export async function getExpenses() {
-  const res = await fetch(`${API_URL}/expenses`, {
+  const res = await fetch(`${API_URL}/api/expenses`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch expenses");
@@ -62,7 +62,7 @@ export async function getExpenses() {
 }
 
 export async function addExpense(expense) {
-  const res = await fetch(`${API_URL}/expenses`, {
+  const res = await fetch(`${API_URL}/api/expenses`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(expense)
@@ -72,7 +72,7 @@ export async function addExpense(expense) {
 }
 
 export async function updateExpense(id, expense) {
-  const res = await fetch(`${API_URL}/expenses/${id}`, {
+  const res = await fetch(`${API_URL}/api/expenses/${id}`, {
     method: "PUT",
     headers: authHeaders(),
     body: JSON.stringify(expense)
@@ -82,7 +82,7 @@ export async function updateExpense(id, expense) {
 }
 
 export async function deleteExpense(id) {
-  const res = await fetch(`${API_URL}/expenses/${id}`, {
+  const res = await fetch(`${API_URL}/api/expenses/${id}`, {
     method: "DELETE",
     headers: authHeaders()
   });
@@ -92,7 +92,7 @@ export async function deleteExpense(id) {
 
 // Budget APIs
 export async function getBudgets() {
-  const res = await fetch(`${API_URL}/budgets`, {
+  const res = await fetch(`${API_URL}/api/budgets`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch budgets");
@@ -100,7 +100,7 @@ export async function getBudgets() {
 }
 
 export async function createBudget(budget) {
-  const res = await fetch(`${API_URL}/budgets`, {
+  const res = await fetch(`${API_URL}/api/budgets`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(budget)
@@ -111,7 +111,7 @@ export async function createBudget(budget) {
 
 // Analytics APIs
 export async function getCategoryAnalytics() {
-  const res = await fetch(`${API_URL}/analytics/category`, {
+  const res = await fetch(`${API_URL}/api/analytics/category`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch analytics");
@@ -119,7 +119,7 @@ export async function getCategoryAnalytics() {
 }
 
 export async function getMonthlyAnalytics() {
-  const res = await fetch(`${API_URL}/analytics/monthly`, {
+  const res = await fetch(`${API_URL}/api/analytics/monthly`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch analytics");
@@ -128,7 +128,7 @@ export async function getMonthlyAnalytics() {
 
 // Debt APIs
 export async function getDebts() {
-  const res = await fetch(`${API_URL}/debts`, {
+  const res = await fetch(`${API_URL}/api/debts`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch debts");
@@ -136,7 +136,7 @@ export async function getDebts() {
 }
 
 export async function addDebt(debt) {
-  const res = await fetch(`${API_URL}/debts`, {
+  const res = await fetch(`${API_URL}/api/debts`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(debt)
@@ -146,7 +146,7 @@ export async function addDebt(debt) {
 }
 
 export async function updateDebt(id, debt) {
-  const res = await fetch(`${API_URL}/debts/${id}`, {
+  const res = await fetch(`${API_URL}/api/debts/${id}`, {
     method: "PUT",
     headers: authHeaders(),
     body: JSON.stringify(debt)
@@ -156,7 +156,7 @@ export async function updateDebt(id, debt) {
 }
 
 export async function deleteDebt(id) {
-  const res = await fetch(`${API_URL}/debts/${id}`, {
+  const res = await fetch(`${API_URL}/api/debts/${id}`, {
     method: "DELETE",
     headers: authHeaders()
   });
@@ -166,7 +166,7 @@ export async function deleteDebt(id) {
 
 // Friend APIs
 export async function getFriends() {
-  const res = await fetch(`${API_URL}/friends`, {
+  const res = await fetch(`${API_URL}/api/friends`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch friends");
@@ -174,7 +174,7 @@ export async function getFriends() {
 }
 
 export async function getFriendRequests() {
-  const res = await fetch(`${API_URL}/friends/requests`, {
+  const res = await fetch(`${API_URL}/api/friends/requests`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch friend requests");
@@ -182,7 +182,7 @@ export async function getFriendRequests() {
 }
 
 export async function sendFriendRequest(username) {
-  const res = await fetch(`${API_URL}/friends/request`, {
+  const res = await fetch(`${API_URL}/api/friends/request`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ friend_username: username })
@@ -192,7 +192,7 @@ export async function sendFriendRequest(username) {
 }
 
 export async function acceptFriendRequest(friendshipId) {
-  const res = await fetch(`${API_URL}/friends/${friendshipId}/accept`, {
+  const res = await fetch(`${API_URL}/api/friends/${friendshipId}/accept`, {
     method: "PUT",
     headers: authHeaders()
   });
@@ -201,7 +201,7 @@ export async function acceptFriendRequest(friendshipId) {
 }
 
 export async function removeFriend(friendshipId) {
-  const res = await fetch(`${API_URL}/friends/${friendshipId}`, {
+  const res = await fetch(`${API_URL}/api/friends/${friendshipId}`, {
     method: "DELETE",
     headers: authHeaders()
   });
@@ -211,7 +211,7 @@ export async function removeFriend(friendshipId) {
 
 // Split Expense APIs
 export async function getSplitExpenses() {
-  const res = await fetch(`${API_URL}/split-expenses`, {
+  const res = await fetch(`${API_URL}/api/split-expenses`, {
     headers: authHeaders()
   });
   if (!res.ok) throw new Error("Failed to fetch split expenses");
@@ -219,7 +219,7 @@ export async function getSplitExpenses() {
 }
 
 export async function addSplitExpense(splitExpense) {
-  const res = await fetch(`${API_URL}/split-expenses`, {
+  const res = await fetch(`${API_URL}/api/split-expenses`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(splitExpense)
@@ -229,7 +229,7 @@ export async function addSplitExpense(splitExpense) {
 }
 
 export async function deleteSplitExpense(id) {
-  const res = await fetch(`${API_URL}/split-expenses/${id}`, {
+  const res = await fetch(`${API_URL}/api/split-expenses/${id}`, {
     method: "DELETE",
     headers: authHeaders()
   });

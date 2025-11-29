@@ -17,8 +17,9 @@ from .auth import (
 from datetime import date, timedelta
 from typing import List
 
-router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+router = APIRouter(prefix="/api")
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/token")
 
 def get_db():
     db = SessionLocal()
